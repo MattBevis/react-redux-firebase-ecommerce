@@ -5,7 +5,7 @@ import "./styles.scss";
 const Footer = () => {
   return (
     <footer className="footer">
-      <div className="wrap">SimpleTut 2021</div>
+      <div className="wrap">© SimpleTut 2021</div>
     </footer>
   );
 };
