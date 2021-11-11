@@ -1,21 +1,40 @@
-import { initializeApp } from "firebase/app";
+import { initializeApp } from 'firebase/app';
 import {
   getFirestore,
   serverTimestamp,
   doc,
   getDoc,
   setDoc,
-} from "firebase/firestore";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { firebaseConfig } from "./config";
+} from 'firebase/firestore';
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from 'firebase/auth';
+import { firebaseConfig } from './config';
 
 const app = initializeApp(firebaseConfig);
 
 export const auth = getAuth();
 export const firestore = getFirestore();
 
+export const registerUser = async (formData) => {
+  const { user } = await createUserWithEmailAndPassword(
+    auth,
+    formData.email,
+    formData.password
+  );
+
+  await handleUserProfile(user, formData.displayName);
+};
+
+export const login = async (email, password) =>
+  signInWithEmailAndPassword(auth, email, password);
+
 const GoogleProvider = new GoogleAuthProvider();
-GoogleProvider.setCustomParameters({ prompt: "select_account" });
+GoogleProvider.setCustomParameters({ prompt: 'select_account' });
 
 export const signInWithGoogle = () => signInWithPopup(auth, GoogleProvider);
 
@@ -37,7 +56,7 @@ export const handleUserProfile = async (userAuth, additionalData) => {
       });
     } catch (err) {
       console.log(
-        "🚀 ~ file: utils.js ~ line 31 ~ handleUserProfile ~ err",
+        '🚀 ~ file: utils.js ~ line 31 ~ handleUserProfile ~ err',
         err
       );
     }

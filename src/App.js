@@ -1,14 +1,14 @@
-import React from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
-import { onSnapshot } from "@firebase/firestore";
-import HomePage from "./pages/HomePage";
-import Registration from "./pages/Registration";
-import Login from "./pages/Login";
-import MainLayout from "./layouts/MainLayout";
-import HomePageLayout from "./layouts/HomePageLayout";
-import { auth, handleUserProfile } from "./firebase/utils";
+import React from 'react';
+import { Route, Switch, Redirect } from 'react-router-dom';
+import { onSnapshot } from '@firebase/firestore';
+import HomePage from './pages/HomePage';
+import Registration from './pages/Registration';
+import Login from './pages/Login';
+import MainLayout from './layouts/MainLayout';
+import HomePageLayout from './layouts/HomePageLayout';
+import { auth, handleUserProfile } from './firebase/utils';
 
-import "./default.scss";
+import './default.scss';
 
 function App() {
   const [currentUser, setCurrentUser] = React.useState(null);
@@ -47,11 +47,15 @@ function App() {
         />
         <Route
           path="/registration"
-          render={() => (
-            <MainLayout currentUser={currentUser}>
-              <Registration />
-            </MainLayout>
-          )}
+          render={() =>
+            currentUser ? (
+              <Redirect to="/" />
+            ) : (
+              <MainLayout currentUser={currentUser}>
+                <Registration />
+              </MainLayout>
+            )
+          }
         />
         <Route
           path="/login"
