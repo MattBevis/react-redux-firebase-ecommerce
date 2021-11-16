@@ -9,6 +9,7 @@ import HomePageLayout from './layouts/HomePageLayout';
 import { auth, handleUserProfile } from './firebase/utils';
 
 import './default.scss';
+import ResetPassword from './pages/ResetPassword';
 
 function App() {
   const [currentUser, setCurrentUser] = React.useState(null);
@@ -34,10 +35,10 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
+    <div className='App'>
       <Switch>
         <Route
-          path="/"
+          path='/'
           render={() => (
             <HomePageLayout currentUser={currentUser}>
               <HomePage />
@@ -46,10 +47,10 @@ function App() {
           exact
         />
         <Route
-          path="/registration"
+          path='/registration'
           render={() =>
             currentUser ? (
-              <Redirect to="/" />
+              <Redirect to='/' />
             ) : (
               <MainLayout currentUser={currentUser}>
                 <Registration />
@@ -58,16 +59,24 @@ function App() {
           }
         />
         <Route
-          path="/login"
+          path='/login'
           render={() =>
             currentUser ? (
-              <Redirect to="/" />
+              <Redirect to='/' />
             ) : (
               <MainLayout currentUser={currentUser}>
                 <Login />
               </MainLayout>
             )
           }
+        />
+        <Route
+          path='/reset'
+          render={() => (
+            <MainLayout currentUser={currentUser}>
+              <ResetPassword></ResetPassword>
+            </MainLayout>
+          )}
         />
       </Switch>
     </div>

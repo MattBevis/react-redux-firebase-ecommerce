@@ -2,6 +2,7 @@ import React from 'react';
 import { auth, registerUser } from '../../firebase/utils';
 import Button from '../Forms/Button';
 import FormInput from '../Forms/Input';
+import FormWrapper from '../FormWrapper';
 
 import './styles.scss';
 
@@ -39,10 +40,8 @@ function RegisterForm() {
   };
 
   return (
-    <div className="register">
-      <div className="wrap">
-        <h2>Register</h2>
-        {displayName}
+    <FormWrapper headline='Register'>
+      <div className='formWrap'>
         {errors.length > 0 && (
           <ul>
             {errors.map((err, index) => (
@@ -50,41 +49,39 @@ function RegisterForm() {
             ))}
           </ul>
         )}
-        <div className="formWrap">
-          <form onSubmit={handleFormSubmit}>
-            <FormInput
-              type="text"
-              name="displayName"
-              value={displayName}
-              placeholder="Full name"
-              onChange={(e) => setDisplayName(e.target.value)}
-            />
-            <FormInput
-              type="email"
-              name="email"
-              value={email}
-              placeholder="Email"
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <FormInput
-              type="password"
-              name="password"
-              value={password}
-              placeholder="Password"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <FormInput
-              type="password"
-              name="confirmPassword"
-              value={confirmPassword}
-              placeholder="Confirm password"
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            />
-            <Button type="submit">Register</Button>
-          </form>
-        </div>
+        <form onSubmit={handleFormSubmit}>
+          <FormInput
+            type='text'
+            name='displayName'
+            value={displayName}
+            placeholder='Full name'
+            onChange={(e) => setDisplayName(e.target.value)}
+          />
+          <FormInput
+            type='email'
+            name='email'
+            value={email}
+            placeholder='Email'
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <FormInput
+            type='password'
+            name='password'
+            value={password}
+            placeholder='Password'
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <FormInput
+            type='password'
+            name='confirmPassword'
+            value={confirmPassword}
+            placeholder='Confirm password'
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+          <Button type='submit'>Register</Button>
+        </form>
       </div>
-    </div>
+    </FormWrapper>
   );
 }
 

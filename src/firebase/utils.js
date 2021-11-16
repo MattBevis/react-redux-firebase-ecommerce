@@ -12,6 +12,7 @@ import {
   signInWithPopup,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  sendPasswordResetEmail,
 } from 'firebase/auth';
 import { firebaseConfig } from './config';
 
@@ -32,6 +33,9 @@ export const registerUser = async (formData) => {
 
 export const login = async (email, password) =>
   signInWithEmailAndPassword(auth, email, password);
+
+export const sendResetPassword = async (email) =>
+  sendPasswordResetEmail(auth, email, { url: 'http://localhost:3000/login' });
 
 const GoogleProvider = new GoogleAuthProvider();
 GoogleProvider.setCustomParameters({ prompt: 'select_account' });
